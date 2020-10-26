@@ -1,0 +1,23 @@
+<h1 align="center">ログイン</h1>
+
+	<%= form_for(:session, url:login_path) do |f| %>
+	<p align="center">
+		<%= f.label :email, "メールアドレス" %>
+		<%= f.text_field :email %>
+	</p>
+	<p align="center">
+		<%= f.label :password, "パスワード" %>
+		<%= f.password_field :password %>
+	</p>
+	<p align="center">
+		<%= f.label :remember_me, class: "checkbox inline" do %>
+		<%= f.check_box :remember_me %>
+		<span>ログイン状態を保存する場合はチェックをしてください。</span>
+		<% end -%>	
+	</p>
+	
+
+
+	<p align="center"><%= f.submit "ログイン" %></p>
+
+<% end %>

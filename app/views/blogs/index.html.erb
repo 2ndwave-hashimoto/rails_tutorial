@@ -1,0 +1,29 @@
+<h1 align="center">RoRブログ</h1>
+<%= flash[:success] %>
+<% if logged_in? %>
+	<p align="center"><%= link_to  "記事を書く", new_blog_path %></p>
+<% end -%>
+<table border="1" align="center">
+	<tr>
+		<th>No</th>
+		<th>タイトル</th>
+		<% if logged_in? %>
+			<th>修正リンク</th>
+			<th>削除リンク</th>
+		<% end -%>
+	</tr>
+
+	<% @blogs.each do |blog| %>
+	<tr>
+		<td><%= blog.id %></td>
+		<td><%= link_to blog.title, blog_path(:id => blog.id) %></td>
+		<% if logged_in? %>
+			<td><%= link_to "編集" , edit_blog_path(:id => blog.id) %></td>
+			<td><%= link_to "削除", blog_path(:id => blog.id), method: :delete, data: {confirm: "この記事を削除しますか？"} %></td>
+		<% end -%>
+	</tr>
+	<% end %>
+</table>
+<div>
+	
+

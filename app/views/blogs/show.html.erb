@@ -1,0 +1,40 @@
+<h1 align="center"><%= @blog.title %></h1>
+<p align="center"><%= flash[:success] %></p>
+<p align="center"><%= flash[:danger] %></p>
+<p align="center">
+	<%= @blog.content %>
+		
+</p>
+<div align="center">
+	<%= link_to "記事一覧へ戻る", blogs_path %>
+</div>
+
+<div class="comment-wrapper border-top mb-10">
+	<p class="mt-5" align="center">コメント一覧</p>
+	<% if logged_in? %>
+		<% @comments.each do |c| %>
+			<div>
+				<%= c.user.name unless c.user.blank? %>
+				<%= button_to "削除", blog_comment_path(:blog_id => c.blog_id, :comment_id => c.id), method: :delete %>
+					<dr>
+					<%= c.content %>
+			</div>
+			<dr>
+		<% end -%>
+		<%= form_with(model: [@blog, @comment], local: true) do |f| %>
+			<%= f.text_area :comment,class: "form-control", rows: 5 %>
+			<%= button_tag type: "submit", class: "btn btn-success" do %>
+				コメントする
+			<% end -%>
+		<% end -%>
+	<% else %>
+		<% @comments.each do |c| %>
+			<div>
+				<%= c.user.name unless c.user.blank? %>
+				<dr>
+				<%= c.content %>
+			</div>
+			<dr>
+		<% end -%>
+	<% end -%>
+</div>

@@ -1,0 +1,13 @@
+<h1 align="center">ユーザー情報</h1>
+<p align="center"><%= flash[:success] %></p>
+<p align="center"><%= flash[:danger] %></p>
+<p align="center">
+	氏名:<%= @user.name %>
+</p>
+<p align="center">
+	メール:<%= @user.email %>
+</p>
+<div align="center">
+	<%= link_to "記事一覧へ戻る", blogs_path %>
+</div>
+

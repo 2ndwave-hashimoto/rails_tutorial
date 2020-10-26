@@ -1,0 +1,26 @@
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+th {
+	width: 100px;
+}
+th2 {
+	width: 300px;
+}
+
+.box {
+  width: 400px;
+  margin: 0 auto;
+ vertical-align: middle; /* 「vertical-align」を指定してもテキストは縦方向中央揃いにならない */
+ text-align: center;
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
