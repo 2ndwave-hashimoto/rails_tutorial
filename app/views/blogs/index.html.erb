@@ -18,8 +18,9 @@
 		<td><%= blog.id %></td>
 		<td><%= link_to blog.title, blog_path(:id => blog.id) %></td>
 		<% if logged_in? %>
-			<td><%= link_to "編集" , edit_blog_path(:id => blog.id) %></td>
-			<td><%= link_to "削除", blog_path(:id => blog.id), method: :delete, data: {confirm: "この記事を削除しますか？"} %></td>
+			<td><%= link_to "編集", edit_blog_path(blog), class: "btn btn-primary" %></td>
+			<td><%= button_to "削除", blog_path(:id => blog.id), method: :delete, class: "btn btn-danger", data: {confirm: "この記事を削除しますか？"} %></td>
+
 		<% end -%>
 	</tr>
 	<% end %>

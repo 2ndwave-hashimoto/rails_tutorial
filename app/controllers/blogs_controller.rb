@@ -1,4 +1,5 @@
 class BlogsController < ApplicationController
+  protect_from_forgery :except => [:destroy]
   def index
     @blogs = Blog.all.order(created_at: "DESC")
   end
@@ -20,7 +21,7 @@ class BlogsController < ApplicationController
 
   def show
     @blog = Blog.find(params[:id])
-    @comments = @blog.comments
+    @comments = Comment.where(blog_id: params[:id])
     @comment = @blog.comments.build
   end
 
@@ -42,7 +43,6 @@ class BlogsController < ApplicationController
   def destroy
    @blog = Blog.find(params[:id])
    @blog.destroy
-   flash[:success] = "記事を削除しました"
    redirect_to blogs_path
   end
 

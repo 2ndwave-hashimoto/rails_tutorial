@@ -16,13 +16,15 @@
 			<div>
 				<%= c.user.name unless c.user.blank? %>
 				<%= button_to "削除", blog_comment_path(:blog_id => c.blog_id, :comment_id => c.id), method: :delete %>
-					<dr>
+					<br>
 					<%= c.content %>
+					<br>
+					コメント日時：<%= l c.created_at %>
 			</div>
-			<dr>
+			<br>
 		<% end -%>
 		<%= form_with(model: [@blog, @comment], local: true) do |f| %>
-			<%= f.text_area :comment,class: "form-control", rows: 5 %>
+			<%= f.text_area :content,class: "form-control", rows: 5 %>
 			<%= button_tag type: "submit", class: "btn btn-success" do %>
 				コメントする
 			<% end -%>
@@ -31,10 +33,10 @@
 		<% @comments.each do |c| %>
 			<div>
 				<%= c.user.name unless c.user.blank? %>
-				<dr>
+				<br>
 				<%= c.content %>
 			</div>
-			<dr>
+			<br>
 		<% end -%>
 	<% end -%>
 </div>
