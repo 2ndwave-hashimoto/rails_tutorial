@@ -1,0 +1,17 @@
+<%= render 'layouts/error_messages', model: f.object %>
+<p align="center"><%= flash[:success] %></p>
+<p align="center"><%= flash[:danger] %></p>
+<p>
+  <%= f.label :title,"タイトル" %>
+  <br>
+  <%= f.text_field :title %>
+</p>
+<p>
+  <%= f.label :content,"内容" %>
+  <br>
+  <%= f.text_area :content %>
+</p>
+
+<div align="center">
+	<%= link_to "記事一覧へ戻る" ,blogs_path %>
+</div>

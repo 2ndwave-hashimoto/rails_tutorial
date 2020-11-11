@@ -1,20 +1,24 @@
 <h1 align="center">記事編集</h1>
+<br>
 <p align="center"><%= flash[:success] %></p>
 <p align="center"><%= flash[:danger] %></p>
+<br>
 	<%= form_for(@blog) do |f| %>
 		<p align="center">
 			<%= f.label :title,"タイトル" %>
 			<%= f.text_field :title %>
 		</p>
+		<br>
 		<p align="center">
 			<%= f.label :content,"コンテンツ" %>
-			<%= f.text_field :content %>
+			<br>
+			<%= f.text_area :content, class: "form-control", rows: 5  %>
 		</p>
 		<p align="center">
 			<%= f.submit "更新" %>
 		</p>
 	<% end %>
-	
+<br>
 <div align="center">
 	<%= link_to "記事一覧へ戻る" , blogs_path %>
 </div>

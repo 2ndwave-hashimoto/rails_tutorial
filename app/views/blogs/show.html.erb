@@ -1,25 +1,27 @@
 <h1 align="center"><%= @blog.title %></h1>
+<br>
 <p align="center"><%= flash[:success] %></p>
 <p align="center"><%= flash[:danger] %></p>
+<br>
 <p align="center">
-	<%= @blog.content %>
-		
+	<%= safe_join(@blog.content.split("\n"),tag(:br)) %>
 </p>
 <div align="center">
 	<%= link_to "記事一覧へ戻る", blogs_path %>
 </div>
+<br>
 
 <div class="comment-wrapper border-top mb-10">
 	<p class="mt-5" align="center">コメント一覧</p>
 	<% if logged_in? %>
 		<% @comments.each do |c| %>
 			<div>
-				<%= c.user.name unless c.user.blank? %>
-				<%= button_to "削除", blog_comment_path(:blog_id => c.blog_id, :comment_id => c.id), method: :delete %>
+				投稿者：<%= c.user.name unless c.user.blank? %>
 					<br>
-					<%= c.content %>
+					日時：<%= l c.created_at %>
 					<br>
-					コメント日時：<%= l c.created_at %>
+					<%= safe_join(c.content.split("\n"),tag(:br)) %>
+					<%= button_to "削除", blog_comment_path(:blog_id => c.blog_id, :comment_id => c.id), method: :delete %>
 			</div>
 			<br>
 		<% end -%>

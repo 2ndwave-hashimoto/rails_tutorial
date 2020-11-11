@@ -3,20 +3,38 @@
 <% if logged_in? %>
 	<p align="center"><%= link_to  "記事を書く", new_blog_path %></p>
 <% end -%>
+
+<div align="center">
+	<%= form_with url: blogs_path, method: :get, local: true do |f| %>
+		<%= f.text_field :keyword, placeholder: "キーワードを入力" %>
+
+		<%= f.label :from %>
+		<%= f.date_field :from %>
+
+		<%= f.label :to %>
+		<%= f.date_field :to %>
+
+		<%= f.submit "検索", class: "btn btn-primary" %>
+	<% end -%>
+</div>
+<br>
+
 <table border="1" align="center">
 	<tr>
-		<th>No</th>
 		<th>タイトル</th>
+		<th>投稿日時</th>
+		<th>更新日時</th>
 		<% if logged_in? %>
-			<th>修正リンク</th>
+			<th>編集リンク</th>
 			<th>削除リンク</th>
 		<% end -%>
 	</tr>
 
 	<% @blogs.each do |blog| %>
 	<tr>
-		<td><%= blog.id %></td>
 		<td><%= link_to blog.title, blog_path(:id => blog.id) %></td>
+		<td><%= l blog.created_at %></td>
+		<td><%= l blog.updated_at %></td>
 		<% if logged_in? %>
 			<td><%= link_to "編集", edit_blog_path(blog), class: "btn btn-primary" %></td>
 			<td><%= button_to "削除", blog_path(:id => blog.id), method: :delete, class: "btn btn-danger", data: {confirm: "この記事を削除しますか？"} %></td>
@@ -25,6 +43,9 @@
 	</tr>
 	<% end %>
 </table>
-<div>
-	
+
+<div class="text-center">
+	<%== pagy_bootstrap_nav(@pagy) %>
+</div>
+
 

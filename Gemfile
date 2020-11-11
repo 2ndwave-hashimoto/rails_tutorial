@@ -64,3 +64,5 @@ gem "jquery-rails"
 gem 'bcrypt', '~> 3.1.7'
 gem 'rails-i18n'
 gem 'devise'
+gem 'kaminari'
+gem 'pagy'

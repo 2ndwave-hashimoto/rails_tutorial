@@ -1,7 +1,11 @@
 class BlogsController < ApplicationController
   protect_from_forgery :except => [:destroy]
   def index
-    @blogs = Blog.all.order(created_at: "DESC")
+    @blogs = Blog.search_blogs(params[:keyword]) if params[:keyword].present?
+    @blogs = Blog.data_narrow_down(params[:from], params[:to]).recent if params[:from].present? || params[:to].present?
+    @blogs = Blog.all.recent if @blogs.nil?
+    @pagy, @blogs = pagy(@blogs)
+    
   end
 
   def new
@@ -50,4 +54,8 @@ private
   def blog_params
     params.require(:blog).permit(:id,:title,:content)
   end
+  def blog_search_params
+    params.fetch(:search,{}).permit(:title, :create_at_from, :created_at_to)
+  end
+
 end
